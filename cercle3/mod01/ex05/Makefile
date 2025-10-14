@@ -2,7 +2,7 @@
 #* >> USER CONFIGURATION (MANDATORY)
 # =============================================================================
 
-NAME      ?= ex05
+NAME      ?= harl
 ifeq ($(NAME),)
     $(error NAME is empty: please define executable name)
 endif

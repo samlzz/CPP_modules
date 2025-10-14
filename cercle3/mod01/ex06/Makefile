@@ -2,7 +2,7 @@
 #* >> USER CONFIGURATION (MANDATORY)
 # =============================================================================
 
-NAME      ?= ex06
+NAME      ?= harlFilter
 ifeq ($(NAME),)
     $(error NAME is empty: please define executable name)
 endif
