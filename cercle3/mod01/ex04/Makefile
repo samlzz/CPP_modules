@@ -2,7 +2,7 @@
 #* >> USER CONFIGURATION (MANDATORY)
 # =============================================================================
 
-NAME      ?= ex04
+NAME      ?= ft_sed
 ifeq ($(NAME),)
     $(error NAME is empty: please define executable name)
 endif

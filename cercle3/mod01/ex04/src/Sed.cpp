@@ -1,15 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Sed.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/14 16:45:12 by sliziard          #+#    #+#             */
+/*   Updated: 2025/10/14 16:45:12 by sliziard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Sed.hpp"
 
 //* Constructors
-Sed::Sed()
-{
-	std::cout << "Sed default constructor called" << std::endl;
-}
 
 Sed::Sed(
 	const std::string &filename, const std::string &s1, const std::string &s2)
-	: _filename(filename), _s1(s1), _s2(s2)
+	: _args((struct s_args) {filename, s1, s2}),
+	_in(filename.c_str()),
+	_out()
 {
+	std::cout << "Sed constructor called" << std::endl;
+	if (_in.is_open())
+		_out.open((filename + ".replace").c_str());
+	_stream_err = !_in.is_open() || !_out.is_open();
 }
 
 Sed::Sed(const Sed &other)
@@ -24,9 +38,7 @@ Sed &Sed::operator=(const Sed &other)
 	std::cout << "Sed assignment operator called" << std::endl;
 	if (this != &other)
 	{
-		this->_filename = other._filename;
-		this->_s1		= other._s1;
-		this->_s2		= other._s2;
+		_args = other._args;
 	}
 	return *this;
 }
@@ -39,11 +51,11 @@ std::string Sed::replace_line(const std::string &line) const
 	size_t		start = 0;
 	size_t		pos;
 
-	while ((pos = line.find(this->_s1, start)) != std::string::npos)
+	while ((pos = line.find(_args.s1, start)) != std::string::npos)
 	{
 		res += line.substr(start, pos - start);
-		res += this->_s2;
-		start = pos + this->_s1.length();
+		res += _args.s2;
+		start = pos + _args.s1.length();
 	}
 	res += line.substr(start);
 	return (res);
@@ -51,26 +63,16 @@ std::string Sed::replace_line(const std::string &line) const
 
 bool Sed::process(void)
 {
-	std::ifstream in_file(this->_filename.c_str());
-	if (!in_file.is_open())
+	if (_stream_err)
 	{
-		std::cerr << "Error: could not open input file." << std::endl;
-		return (false);
-	}
-	std::ofstream out_file((this->_filename + ".replace").c_str());
-	if (!out_file.is_open())
-	{
-		in_file.close();
-		std::cerr << "Error: could not open output file." << std::endl;
+		std::cerr << "Error: could not open file." << std::endl;
 		return (false);
 	}
 
 	std::string line;
-	while (std::getline(in_file, line))
-		out_file << replace_line(line) << std::endl;
+	while (std::getline(_in, line))
+		_out << replace_line(line) << std::endl;
 
-	in_file.close();
-	out_file.close();
 	return (true);
 }
 
@@ -79,4 +81,8 @@ bool Sed::process(void)
 Sed::~Sed()
 {
 	std::cout << "Sed destructor called" << std::endl;
+	if (_in.is_open())
+		_in.close();
+	if (_out.is_open())
+		_out.close();
 }
