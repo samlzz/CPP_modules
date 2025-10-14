@@ -2,7 +2,7 @@
 #* >> USER CONFIGURATION (MANDATORY)
 # =============================================================================
 
-NAME      ?= ex03
+NAME      ?= violence
 ifeq ($(NAME),)
     $(error NAME is empty: please define executable name)
 endif

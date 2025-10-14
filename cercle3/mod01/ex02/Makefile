@@ -2,7 +2,7 @@
 #* >> USER CONFIGURATION (MANDATORY)
 # =============================================================================
 
-NAME      ?= ThisIsBrain
+NAME      ?= thisIsBrain
 ifeq ($(NAME),)
     $(error NAME is empty: please define executable name)
 endif
