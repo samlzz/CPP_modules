@@ -2,7 +2,7 @@
 #* >> USER CONFIGURATION (MANDATORY)
 # =============================================================================
 
-NAME      ?= ex01
+NAME      ?= fixed
 ifeq ($(NAME),)
     $(error NAME is empty: please define executable name)
 endif
