@@ -6,14 +6,13 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 19:14:37 by sliziard          #+#    #+#             */
-/*   Updated: 2025/06/23 05:00:59 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/06/23 05:01:30 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
-#include <cmath>
 #include <iostream>
 #include <stdint.h>
 
@@ -58,8 +57,9 @@ public:
 	float	toFloat(void) const;
 
 private:
+	static const int32_t _fract_bits;
+
 	int32_t				 _fixed_point;
-	static const int32_t _fract_bits = 8;
 };
 
 std::ostream &operator<<(std::ostream &os, Fixed const &fixed);

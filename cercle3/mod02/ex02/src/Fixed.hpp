@@ -13,7 +13,6 @@
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
-#include <cmath>
 #include <iostream>
 #include <stdint.h>
 
@@ -58,8 +57,9 @@ public:
 	float	toFloat(void) const;
 
 private:
+	static const int32_t _fract_bits;
+
 	int32_t				 _fixed_point;
-	static const int32_t _fract_bits = 8;
 };
 
 std::ostream &operator<<(std::ostream &os, Fixed const &fixed);

@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include <cmath>
+
+const int32_t Fixed::_fract_bits = 8;
 
 // *Constructors
 Fixed::Fixed() : _fixed_point(0)
