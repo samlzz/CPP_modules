@@ -13,7 +13,10 @@ OBJ_DIR   = build/
 BIN_DIR   =
 
 ### UFILES_START ###
-FILES     ?= 
+FILES =	Fixed.cpp \
+		Point.cpp \
+		bsp.cpp \
+		main.cpp
 ### END ###
 ifeq ($(FILES),)
     $(error FILES is empty: please define source files)
@@ -29,7 +32,7 @@ CC        = cc
 CFLAGS    = -Wall -Wextra -Werror
 
 CXX       = c++
-CXXFLAGS  = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS  = -Wall -Wextra -Werror -std=c++98 -g3
 
 INCL_DIRS =
 #? Directories & Libraries to link against

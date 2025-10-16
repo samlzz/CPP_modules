@@ -6,7 +6,7 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:24:03 by sliziard          #+#    #+#             */
-/*   Updated: 2025/10/15 15:24:04 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:14:57 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,42 +27,44 @@ Point::Point(float const x, float const y) : _x(x), _y(y)
 #endif
 }
 
-Point::Point(const Point &other)
+Point::Point(Fixed const &x, Fixed const &y): _x(x), _y(y)
+{
+#ifdef PRINT_CALLER
+	std::cout << "Point private parameters constructor called" << std::endl;
+#endif
+}
+
+Point::Point(const Point &other) : _x(other.getX()), _y(other.getY())
 {
 #ifdef PRINT_CALLER
 	std::cout << "Point copy constructor called" << std::endl;
 #endif
-	*this = other;
 }
 
 // operators
 Point &Point::operator=(const Point &other)
 {
+  (void)other;
 #ifdef PRINT_CALLER
 	std::cerr << "Point assignment operator can't perform because attributes "
 				 "are constant"
 			  << std::endl;
 #endif
-	if (this != &other)
-	{
-	}
 	return (*this);
 }
 Point Point::operator+(const Point &other) const
 {
-	return Point(
-		(this->_x + other._x).toFloat(), (this->_y + other._y).toFloat());
+	return Point(this->_x + other._x, this->_y + other._y);
 }
 Point Point::operator-(const Point &other) const
 {
-	return Point(
-		(this->_x - other._x).toFloat(), (this->_y - other._y).toFloat());
+	return Point(this->_x - other._x, this->_y - other._y);
 }
 Fixed Point::operator*(const Point &other) const
 {
-	return (this->_x * other._x + this->_y * other._y);
+	return (this->_x * other._x - this->_y * other._y);
 }
-Point Point::operator/(const Point &other) const
+Point Point::operator/(const Point &/*unusued*/) const
 {
 	std::cerr << "Error: division of Point objects is not defined."
 			  << std::endl;
