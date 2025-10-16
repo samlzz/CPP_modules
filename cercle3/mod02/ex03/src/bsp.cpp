@@ -6,7 +6,7 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:23:53 by sliziard          #+#    #+#             */
-/*   Updated: 2025/10/16 18:23:56 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:57:18 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 static Fixed cross(Point const& p1, Point const& p2, Point const& p3)
 {
-  return (p1 - p3) * (p2 - p3);
+	Point	u(p1 - p3);
+	Point	v(p2 - p3);
+	return (u.crossProduct(v));
 }
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
   Fixed d1 = cross(point, a, b);
-  Fixed d2 = cross(point, b, a);
+  Fixed d2 = cross(point, b, c);
   Fixed d3 = cross(point, c, a);
   Fixed zero = Fixed(0);
 
