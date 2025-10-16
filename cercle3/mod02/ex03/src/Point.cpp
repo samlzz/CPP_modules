@@ -6,7 +6,7 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:24:03 by sliziard          #+#    #+#             */
-/*   Updated: 2025/10/16 18:14:57 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:55:27 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ Point Point::operator-(const Point &other) const
 }
 Fixed Point::operator*(const Point &other) const
 {
-	return (this->_x * other._x - this->_y * other._y);
+	return (this->_x * other._x + this->_y * other._y);
 }
 Point Point::operator/(const Point &/*unusued*/) const
 {
@@ -82,6 +82,11 @@ std::ostream &operator<<(std::ostream &os, const Point &p)
 	return (os);
 }
 //* Methods
+
+Fixed	Point::crossProduct(const Point &other) const
+{
+	return (this->_x * other.getY() - this->_y * other.getX());
+}
 
 Fixed const &Point::getX(void) const
 {

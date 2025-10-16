@@ -6,7 +6,7 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:23:57 by sliziard          #+#    #+#             */
-/*   Updated: 2025/10/16 15:49:04 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:58:21 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 #include <iostream>
 #include <stdint.h>
 
-#define PRINT_CALLER
-
 class Point
 {
 
 public:
 	Point();
 	Point(float const x, float const y);
-  Point(Fixed const &x, Fixed const &y);
+	Point(Fixed const &x, Fixed const &y);
 	Point(const Point &other);
 
 	Point &operator=(const Point &other);
@@ -41,6 +39,8 @@ public:
 
 	Fixed const &getX(void) const;
 	Fixed const &getY(void) const;
+
+	Fixed	crossProduct(const Point &other) const;
 
 private:
 	Fixed const _x;
