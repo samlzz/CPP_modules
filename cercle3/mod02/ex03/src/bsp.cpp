@@ -6,24 +6,27 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:23:53 by sliziard          #+#    #+#             */
-/*   Updated: 2025/10/15 15:23:53 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/10/16 18:23:56 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
+static Fixed cross(Point const& p1, Point const& p2, Point const& p3)
+{
+  return (p1 - p3) * (p2 - p3);
+}
+
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
-	if (point == a || point == b || point == c)
-		return (false);
-	Point v0(c - a), v1(b - a), v2(point - a);
-	Fixed dot0(v0 * v0), dot1(v0 * v1), dot2(v0 * v2), dot3(v1 * v1),
-		dot4(v1 * v2);
-	v0.~Point();
-	v1.~Point();
-	v2.~Point();
-	Fixed inv(Fixed(1) / (dot0 * dot3 - dot1 * dot1));
-	Fixed u((dot3 * dot2 - dot1 * dot4) * inv);
-	Fixed v((dot0 * dot4 - dot1 * dot2) * inv);
-	return (u > 0 && v > 0 && u + v < 1);
+  Fixed d1 = cross(point, a, b);
+  Fixed d2 = cross(point, b, a);
+  Fixed d3 = cross(point, c, a);
+  Fixed zero = Fixed(0);
+
+  if (d1 == zero || d2 == zero || d3 == zero)
+    return false;
+  bool  allPos = (d1 > zero && d2 > zero && d3 > zero);
+  bool  allNeg = (d1 < zero && d2 < zero && d3 < zero);
+  return allPos || allNeg;
 }
