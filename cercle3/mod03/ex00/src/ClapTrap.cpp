@@ -6,11 +6,12 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 05:49:46 by sliziard          #+#    #+#             */
-/*   Updated: 2025/06/23 08:57:53 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/10/18 13:48:29 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+#include <iostream>
 
 // *Constructors
 ClapTrap::ClapTrap(const std::string &name)
@@ -54,7 +55,7 @@ void ClapTrap::attack(const std::string &target)
 	this->print_act("attacks " + target + ", causing", this->_dammage,
 		"points of damage !");
 }
-void ClapTrap::takeDammage(uint32_t amount)
+void ClapTrap::takeDamage(uint32_t amount)
 {
 	this->_hit -= amount;
 	this->print_act("take", amount, "of damage.");

@@ -6,15 +6,15 @@
 /*   By: sliziard <sliziard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 05:49:48 by sliziard          #+#    #+#             */
-/*   Updated: 2025/06/23 06:02:48 by sliziard         ###   ########.fr       */
+/*   Updated: 2025/10/18 13:48:18 by sliziard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
 
-#include <iostream>
 #include <stdint.h>
+#include <string>
 
 #define PRINT_CALLER
 
@@ -28,7 +28,7 @@ public:
 	~ClapTrap();
 
 	void attack(const std::string &target);
-	void takeDammage(uint32_t amount);
+	void takeDamage(uint32_t amount);
 	void beRepaired(uint32_t amount);
 
 protected:

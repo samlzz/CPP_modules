@@ -13,7 +13,8 @@ OBJ_DIR   = build/
 BIN_DIR   =
 
 ### UFILES_START ###
-FILES     ?= 
+FILES =	ClapTrap.cpp \
+		main.cpp
 ### END ###
 ifeq ($(FILES),)
     $(error FILES is empty: please define source files)
