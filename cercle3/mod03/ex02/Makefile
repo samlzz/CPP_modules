@@ -13,7 +13,7 @@ OBJ_DIR   = build/
 BIN_DIR   =
 
 ### UFILES_START ###
-FILES =	ScavTrap.cpp \
+FILES =	FragTrap.cpp \
 		main.cpp
 ### END ###
 ifeq ($(FILES),)
